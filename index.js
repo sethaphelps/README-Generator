@@ -1,8 +1,11 @@
-// TODO: Include packages needed for this application
+// Packages needed for this application
+
 const inquirer = require("inquirer");
 const fs = require("fs/promises");
 const generateMarkdown = require("./utils/generateMarkdown.js");
-// TODO: Create an array of questions for user input
+
+// TODO: Array of questions for user input
+
 const questions = [
   {
     type: "input",
@@ -15,56 +18,67 @@ const questions = [
     message: "Provide a short description explaining the what, why, and how of your project.",
   },
   {
-    type: "list",
+    type: "input",
     name: "installation",
-    // message: "Please choose a license type.",
-    // choices: ["MIT", "GPL", "Apache 2.0", "none"],
+    message: "What steps are required to install your project?",
   },
   {
-    type: "list",
+    type: "input",
     name: "usage",
-    // message: "Please choose a license type.",
-    // choices: ["MIT", "GPL", "Apache 2.0", "none"],
+    message: "Provide instructions and examples for using your program",
+    
   },
   {
-    type: "list",
-    name: "credits",
-    // message: "Please choose a license type.",
-    // choices: ["MIT", "GPL", "Apache 2.0", "none"],
+    type: "input",
+    name: "contributions",
+    message: "Include any collaborations or third-party assets and their links.",
   },
   {
     type: "list",
     name: "license",
     message: "Please choose a license type.",
-    choices: ["MIT", "GPL", "Apache 2.0", "none"],
+    choices: ["MIT", "SIL", "Apache 2.0"],
   },
   {
-    type: "list",
+    type: "input",
     name: "github",
-    // message: "Please choose a license type.",
-    // choices: ["MIT", "GPL", "Apache 2.0", "none"],
+    message: "Enter your GitHub username.",
   },
   {
-    type: "list",
+    type: "input",
     name: "email",
-    // message: "Please choose a license type.",
-    // choices: ["MIT", "GPL", "Apache 2.0", "none"],
+    message: "Enter your e-mail.",
   },
 ];
 
-// TODO: Create a function to write README file
-function writeToFile(fileName, data) {}
+// Function to write the README file
 
-function startPrompt() {
-  console.log("starting prompt");
-  inquirer.prompt(questions).then((responses) => {
-    console.log(generateMarkdown(responses));
-  });
-}
+const writeToFile = data => {
+    fs.writeFile('./readmefile/README.md', data, err => {
+      if (err) {
+          console.log(err);
+          return;
+      } else {
+          console.log('Your Read me has been created!')
+      }
+    })
+};
 
-function init() {
-  startPrompt();
+// TODO: Function to initialize app
+
+const init = () => {
+    return inquirer.prompt(questions);
 }
 
 // Function call to initialize app
-init();
+
+init()
+.then(userInput => {
+    return generateMarkdown(userInput)
+})
+.then(data => {
+    return writeToFile(data)
+})
+.catch(err => {
+    console.log(err)
+});

@@ -1,29 +1,71 @@
-// TODO: Create a function that returns a license badge based on which license is passed in
-// If there is no license, return an empty string
+// Function that returns a license badge based on which license is passed in
+
 function renderLicenseBadge(license) {
-  console.log ("license badge", license)
-  if (license === "MIT" || license === "GPL" || license === "Apache 2.0"){
-    return `This project is licensed under the ${license} license.`
+  if (!license) {
+    return "";
+  } else {
+    return `[![License: MIT](https://img.shields.io/badge/License-${license}-yellow.svg)](${renderLicenseLink(
+      license
+    )})`;
   }
 }
 
-// TODO: Create a function that returns the license link
-// If there is no license, return an empty string
-function renderLicenseLink(license) {}
+// Function that returns the license link
 
-// TODO: Create a function that returns the license section of README
-// If there is no license, return an empty string
-function renderLicenseSection(license) {}
+function renderLicenseLink(license) {
+  if (license === "MIT") {
+    return "https://opensource.org/licenses/MIT";
+  }
+  if (license === "Apache 2.0") {
+    return "https://opensource.org/licenses/Apache-2.0";
+  }
+  if (license === "SIL") {
+    return "https://opensource.org/licenses/OFL-1.1";
+  }
+  if (license === "none") {
+    return "";
+  }
+}
 
-// TODO: Create a function to generate markdown for README
+// Function that returns the license section of README
+
+function renderLicenseSection(license) {
+  return `## License 
+  This project is licensed under ${license}.`;
+}
+
+// Function to generate markdown for README
+
 function generateMarkdown(response = {}) {
-  return `# ${response.title} \n
-  # ${response.description} \n
-  ### Table of Contents \n
+  return `# ${response.title}
 
+  ${renderLicenseBadge(response.license)}
 
-${renderLicenseBadge(response.license)}
+  ## Table of Contents
+  * [Description](#description)
+  * [Installation](#installation)
+  * [Usage](#usage)
+  * [License](#license)
+  * [Contributions](#contributing)
+  * [Questions](#questions)
 
+  ## Description
+  ${response.description}
+
+  ## Installation
+  ${response.installation}
+
+  ## Usage
+  ${response.usage}
+
+  ${renderLicenseSection(response.license)} 
+
+  ## Contributions
+  ${response.contributions}
+
+  ## Creator Information
+  * Github: https://github.com/${response.github}
+  * Email: ${response.email}
 
 `;
 }
