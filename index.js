@@ -31,13 +31,18 @@ const questions = [
   {
     type: "input",
     name: "contributions",
-    message: "Include any collaborations or third-party assets and their links.",
+    message: "Include any collaborators or third-party assets and their links.",
   },
   {
     type: "list",
     name: "license",
     message: "Please choose a license type.",
     choices: ["MIT", "SIL", "Apache 2.0"],
+  },
+  {
+    type: "input",
+    name: "tests",
+    message: "Include any tests you may have created in your application."
   },
   {
     type: "input",

@@ -46,8 +46,9 @@ function generateMarkdown(response = {}) {
   * [Installation](#installation)
   * [Usage](#usage)
   * [License](#license)
-  * [Contributions](#contributing)
-  * [Questions](#questions)
+  * [Contributions](#contributions)
+  * [Tests](#tests)
+  * [Creator](#creator)
 
   ## Description
   ${response.description}
@@ -62,6 +63,9 @@ function generateMarkdown(response = {}) {
 
   ## Contributions
   ${response.contributions}
+
+  ## Tests
+  ${response/tests}
 
   ## Creator Information
   * Github: https://github.com/${response.github}
